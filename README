@@ -1,0 +1,37 @@
+MemToolbox2D 1.0.0.
+
+The MemToolbox2D is a collection of MATLAB functions for modeling visual
+working memory in two-dimensional data. 
+The functions here are adapted from MemToolbox 1.0.0 (Suchow, Brady, 
+Fougnie, & Alvarez, 2013; memtoolbox.org) and require the full MemToolbox 
+1.0.0 to be in the matlab path.
+
+If you wish to acknowledge use of this software when you publish your 
+research, you might say something like, "Data analysis was performed using the 
+MemToolbox2D (Grogan et al., 2019; Suchow et al., 2013)." and 
+then cite:
+
+Grogan, J.P., Fallon, S.J., Zokaei, N., Husain, M., Coulthard, E.J., Manohar, S.G. (2019). A new toolbox to distinguish the sources of spatial memory error.
+
+Suchow, J. W., Brady, T. F., Fougnie, D., & Alvarez, G. A. (2013). 
+Modeling visual working  memory with the MemToolbox. Journal of Vision, 
+13(10):9, 1–8.  doi:10.1167/13.10.9. MemToolbox.org
+
+
+Contents:
+MemFit2D.m            - a general purpose fitting tool for 2D data
+
+MemModels2D           - models of working memory from the literature
+MemPlots2D            - visualization tools
+MemTests2D            - scripts that test toolbox functionality
+MemTutorial2D         - a walkthrough of the toolbox
+MemUtilities2D        - internal helper functions
+
+LICENSE               - the terms under which this toolbox is licensed (BSD)
+README                - this
+
+Dependencies:
+1. The MemToolbox 1.0.0 (MemToolbox.org) is needed for the main functionality.
+2. The Statistics Toolbox (http://www.mathworks.com/products/statistics/) is
+   needed for all of the major functionality of the toolbox.
+3. The parallel computing toolbox is recommended.
