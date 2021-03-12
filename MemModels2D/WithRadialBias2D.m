@@ -1,7 +1,15 @@
 % WITHRadialBIAS2D adds a radial bias towards any coordinate on each trial
-% term to any 2D model. If no data.biasCoords are given, assumes bias is towards
-% the centre of the screen(shrinks or expands responses in relation to 
-% coord on that trial)
+% term to any 2D model. 
+% data.biasCoords can be:
+%   one coordinate [x;y] which is applied to all trials,
+%   a vector of different coordiantes for each trial (i.e. [x(1:n); y(1:n)]
+%   a number-NaN pair, so that the bias only applies to either X or Y
+%   coordinates (e.g. [x; NaN] for a horizontal-only bias)
+%   not given - the model will assume a bias towards the centre of the
+%   screen
+% 
+% The bias parameter (mu) will be proportion of distance covered towards
+% the biasCoords (positive values), or away from (negative values.
 %
 %  model = WithRadialBias2D(model, [priorForMu])
 %
@@ -42,7 +50,7 @@ model.paramNames = [model.paramNames 'mu'];
 model.lowerbound = [model.lowerbound -1];
 model.upperbound = [model.upperbound 1];
 model.movestd = [model.movestd 0.02];
-model.start = [model.start zeros(size(model.start,1),1)];
+model.start = [model.start rand(size(model.start,1),1) - .5];
 
 % Adjust pdf and prior
 model.oldPdf = model.pdf;
@@ -148,6 +156,8 @@ end
 
 resp = targs + err;
 diffs = biasCoords - resp; % get distance from response to coord bias
+
+diffs(isnan(diffs)) = 0; % set any NaN coords to zero - wont' affect move
 
 move = diffs .* mu; % get radial bias
 
