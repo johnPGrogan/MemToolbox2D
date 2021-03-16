@@ -2,12 +2,29 @@
 clear all
 % demo code from the Tutorial.pdf
 
+
+%% fitting to real data
+
+% your data structure needs at minimum the data.errors field, which is
+% response location minus target location.
+% If you model has misbinding, you also need data.distractors, which is the
+% distractors locations minus the target locations.
+% 
+% A default screen size of [1366; 768] will be assumed unless you specify
+% the data.dimensions. You should change this to match your screen
+% 
+% Other models may require extra fields, such as data.resps or data.targets
+% or data.distractors1 and data.distractors2.
+% 
+% 
+
 %% set up trials
 
 numTrials = 300; % number of trials
 itemsPerTrial = ones(1,numTrials)*3; % 3 items per trial
 dimensions = [1366; 768]; % x and y dimensions in units (pixels here)
 simulatedData = GenerateDisplays2D(numTrials, itemsPerTrial, 1,dimensions); % make locations, pick target, calculate target-distractor distance
+% distractors = distractorLocation - targetLocation
 
 % simulate responses
 
@@ -17,12 +34,13 @@ params = [0.1, 0.1, 20]; % gamma, beta, SD
 simulatedData.errors = SampleFromModel2D(model, params,...
                  [1 numTrials], simulatedData); 
 % simulate model to generate responses, calculate distance to targets
-
+% errors = responseLocation - targetLocation
 
 %% fit the data
 
 fit = MLE(simulatedData, model); % fit the model to simulated data
 % maximum likelihood method
+% parameters are in order of model.paramNames
 
 % you can also use Bayesian MCMC fitting (takes longer)
 fit2 = MemFit2D(simulatedData, model);
@@ -108,15 +126,3 @@ simulatedData.errors = SampleFromModel2D(model, params,...
 fit6 = MLE(simulatedData, model); % fit as normal
 
 
-
-%% fitting to real data
-
-% your data structure needs at minimum the data.errors field
-% If you model has misbinding, you also need data.distractors.
-% 
-% A default screen size of [1366; 768] will be assumed unless you specify
-% the data.dimensions. 
-% 
-% Other models may require extra fields, such as data.resps or data.targets
-% or data.distractors1 and data.distractors2.
-% 
