@@ -35,3 +35,7 @@ Dependencies:
 2. The Statistics Toolbox (http://www.mathworks.com/products/statistics/) is
    needed for all of the major functionality of the toolbox.
 3. The parallel computing toolbox is recommended.
+4. It was developed in Matlab R2018b, and works in R2019b. It does not run in R2021, as the mle.m function 
+has been updated, and now requires the input to be a vector rather than a structure. You can either use 
+an earlier version of matlab, or modify the mle.m function as suggested in this issue 
+(https://github.com/visionlab/MemToolbox/issues/31) although that could interfere with other scripts using mle.m
